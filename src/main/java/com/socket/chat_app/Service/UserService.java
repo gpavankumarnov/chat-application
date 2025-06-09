@@ -4,10 +4,13 @@ import com.socket.chat_app.dto.UserDto;
 import com.socket.chat_app.mapper.UsersMapper;
 import com.socket.chat_app.model.Status;
 import com.socket.chat_app.model.User;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 @Service
 public class UserService {
   private UserRepository userRepository;
@@ -23,6 +26,13 @@ public class UserService {
       //convert entity to dto
       User user = usersMapper.convertDtoToEntity(userDto);
       userRepository.save(user);
+    }
+  }
+
+  @Transactional
+  public void leaveUser(UserDto userDto) {
+    if(userDto != null && userDto.getStatus() == Status.LEAVE) {
+     userRepository.deleteByUserName(userDto.getUserName());
     }
   }
 

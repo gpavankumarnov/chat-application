@@ -70,4 +70,11 @@ if(chatMessageDto != null){
     return userService.getAllUsers();
   }
 
+  @MessageMapping("/user-leave")
+  @SendTo("/leave")
+  public void leaveUser(@Payload UserDto userDto){
+    System.out.println("User left: " + userDto.getUserName());
+    userService.leaveUser(userDto);
+  }
+
 }

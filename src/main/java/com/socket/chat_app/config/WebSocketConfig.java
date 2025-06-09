@@ -48,7 +48,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      So when user sends a message from chatroom1 - /topic/chatRoom1
      Then the message has to be broadcasted to all the subscribed clients.
     */
-    registry.enableSimpleBroker("/chatroom, /user");
+    registry.enableSimpleBroker("/chatroom", "/user",  "/leave");
     registry.setUserDestinationPrefix("/user");
   }
 }
